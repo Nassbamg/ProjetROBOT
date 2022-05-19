@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     robot.doConnect();
+
 }
 
 MainWindow::~MainWindow()
