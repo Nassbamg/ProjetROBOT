@@ -20,7 +20,7 @@ public:
     QByteArray DataReceived;
     QMutex Mutex;
     void SetRobot1(short speed1,short speed2,unsigned char SpeedFlag);
-    short Crc16(unsigned char *Adresse_tab , unsigned char Taille_max);
+    unsigned short Crc16(QByteArray tableau , unsigned char Taille_max);
 
 signals:
     void updateUI(const QByteArray Data);

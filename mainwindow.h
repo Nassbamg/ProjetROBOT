@@ -20,6 +20,11 @@ public:
     MyRobot robot;
 
 
+private slots:
+    void on_BUT1_pressed();
+
+    void on_BUT1_released();
+
 private:
     Ui::MainWindow *ui;
 };

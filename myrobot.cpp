@@ -81,12 +81,10 @@ void MyRobot::SetRobot1( short speed1,short speed2,unsigned char SpeedFlag)
     DataToSend[6] = SpeedFlag;
 
 
-    const std::size_t count = DataToSend.size();
-    unsigned char* hex =new unsigned char[count];
-    std::memcpy(hex,DataToSend.constData(),count);
 
-    short crc = this->Crc16(hex + 1  , 7 );
-    std::cout << crc << std::endl;
+
+    unsigned short crc = this->Crc16(DataToSend  , 7 );
+    qDebug() << (unsigned short)crc ;
 
 
     DataToSend[7] = (unsigned char)crc;
@@ -94,7 +92,7 @@ void MyRobot::SetRobot1( short speed1,short speed2,unsigned char SpeedFlag)
 
 }
 
-short MyRobot::Crc16(unsigned char *Adresse_tab , unsigned char Taille_max)
+unsigned short MyRobot::Crc16(QByteArray tableau , unsigned char Taille_max)
 {
 unsigned int Crc = 0xFFFF;
 unsigned int Polynome = 0xA001;
@@ -103,9 +101,9 @@ unsigned int CptBit = 0;
 unsigned int Parity= 0;
  Crc = 0xFFFF;
  Polynome = 0xA001;
-for ( CptOctet= 0 ; CptOctet < Taille_max ; CptOctet++)
+for ( CptOctet= 1 ; CptOctet < Taille_max ; CptOctet++)
  {
- Crc ^= *( Adresse_tab + CptOctet);
+ Crc ^= (unsigned char)tableau[CptOctet];
  for ( CptBit = 0; CptBit <= 7 ; CptBit++)
  {
  Parity= Crc;
