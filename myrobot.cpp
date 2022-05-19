@@ -70,21 +70,29 @@ void MyRobot::MyTimerSlot() {
 //hUSB is the serial port handle opened at 19200 baud
 void MyRobot::SetRobot1( short speed1,short speed2,unsigned char SpeedFlag)
 {
- //DWORD n;
- short crc = 
- DataToSend[0] = char(255);
- DataToSend[1] = 0x07;
- DataToSend[2] = speed1;
- DataToSend[3] = 0;
- DataToSend[4] = speed2;
- DataToSend[5] = SpeedFlag;
- DataToSend[6] = 80;
- DataToSend[7] = 
- DataToSend[8] =         
- 
-//bool res = WriteFile(hUSB, &sbuf, 9,&n, NULL);
-//return res;
-} 
+
+
+    DataToSend[0] = (unsigned char)255;
+    DataToSend[1] = 0x07;
+    DataToSend[2] = speed1;
+    DataToSend[3] = 0;
+    DataToSend[4] = speed2;
+    DataToSend[5] = 0;
+    DataToSend[6] = SpeedFlag;
+
+
+    const std::size_t count = DataToSend.size();
+    unsigned char* hex =new unsigned char[count];
+    std::memcpy(hex,DataToSend.constData(),count);
+
+    short crc = this->Crc16(hex + 1  , 7 );
+    std::cout << crc << std::endl;
+
+
+    DataToSend[7] = (unsigned char)crc;
+    DataToSend[8] =  (unsigned char)(crc >> 8);
+
+}
 
 short MyRobot::Crc16(unsigned char *Adresse_tab , unsigned char Taille_max)
 {
@@ -107,3 +115,5 @@ for ( CptOctet= 0 ; CptOctet < Taille_max ; CptOctet++)
  }
 return(Crc);
 }
+
+
