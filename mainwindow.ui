@@ -14,30 +14,56 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="BUT1">
+   <widget class="QPushButton" name="ButUp">
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>120</y>
+      <x>270</x>
+      <y>60</y>
       <width>80</width>
       <height>18</height>
      </rect>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string>Up</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QPushButton" name="ButDown">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>201</y>
-      <width>111</width>
-      <height>81</height>
+      <x>270</x>
+      <y>200</y>
+      <width>80</width>
+      <height>18</height>
      </rect>
     </property>
     <property name="text">
-     <string>Text</string>
+     <string>Down</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ButRight">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>130</y>
+      <width>80</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Right</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ButLeft">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>130</y>
+      <width>80</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Left</string>
     </property>
    </widget>
   </widget>
