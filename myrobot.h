@@ -21,6 +21,8 @@ public:
     QMutex Mutex;
     void SetRobot1(short speed1,short speed2,unsigned char SpeedFlag);
     unsigned short Crc16(QByteArray tableau , unsigned char Taille_max);
+    short VitesseFromRobot1();
+    short VitesseFromRobot2();
 
 signals:
     void updateUI(const QByteArray Data);

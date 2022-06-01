@@ -3,6 +3,7 @@
 
 #include "myrobot.h"
 #include <QMainWindow>
+#include <QKeyEvent>
 
 
 
@@ -18,9 +19,16 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     MyRobot robot;
+    bool Mouvement = false;
+    void KeyPressEvent(QKeyEvent *e);
+    void KeyReleaseEvent(QKeyEvent *e);
+    void AfficheVitesse();
 
 
+//Boutons interface graphique
 private slots:
+
+    //Boutons directions
     void on_ButUp_pressed();
     void on_ButUp_released();
     void on_ButRight_pressed();
@@ -29,6 +37,11 @@ private slots:
     void on_ButDown_released();
     void on_ButLeft_pressed();
     void on_ButLeft_released();
+
+    //Boutons connexion
+    /*void on_ButConnect_pressed();
+    void on_ButDisconnect_pressed();*/
+
 
 private:
     Ui::MainWindow *ui;

@@ -84,11 +84,37 @@ void MyRobot::SetRobot1( short speed1,short speed2,unsigned char SpeedFlag)
 
 
     unsigned short crc = this->Crc16(DataToSend  , 7 );
-    qDebug() << (unsigned short)crc ;
+    //qDebug() << (unsigned short)crc ;
 
 
     DataToSend[7] = (unsigned char)crc;
     DataToSend[8] =  (unsigned char)(crc >> 8);
+
+}
+
+short MyRobot::VitesseFromRobot1(){
+
+    short vitesse;
+
+
+    vitesse = DataReceived[0]/2448/20;
+
+
+    return vitesse;
+
+
+}
+
+short MyRobot::VitesseFromRobot2(){
+
+    short vitesse;
+
+
+
+    vitesse = DataReceived[9]/2448/20;
+
+    return vitesse;
+
 
 }
 
