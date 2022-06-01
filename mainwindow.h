@@ -4,6 +4,8 @@
 #include "myrobot.h"
 #include <QMainWindow>
 #include <QKeyEvent>
+#include <QWebEngineView>
+#include <QNetworkAccessManager>
 
 
 
@@ -43,7 +45,19 @@ private slots:
     void on_ButDisconnect_pressed();*/
 
 
+    void on_CAM_DOWN_pressed();
+
+    void on_CAM_RIGHT_pressed();
+
+    void on_CAM_UP_pressed();
+
+    void on_CAM_LEFT_pressed();
+
+    void on_V1_overflow();
+
 private:
     Ui::MainWindow *ui;
+    QNetworkAccessManager *manager;
+    QNetworkRequest request;
 };
 #endif // MAINWINDOW_H

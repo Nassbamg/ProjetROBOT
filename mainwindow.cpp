@@ -10,7 +10,20 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     robot.doConnect();
 
+    QWebEngineView *page = ui->CAM;
+    page->load(QUrl("http://192.168.1.106:8080/?action=stream"));
+    //page->load(QUrl("http://158.58.130.148/mjpg/video.mjpg"));
+    manager = new QNetworkAccessManager();
+    ui->INFO->setText(QString(robot.DataReceived[2]));
 
+    short V1 = robot.DataReceived[0]/2448/20*0.44;
+    short V2 = robot.DataReceived[9]/2448/20*0.44;
+    ui->Vitesse1->setText(QString(V1));
+    ui->Vitesse2->setText(QString(V2));
+
+    QPalette pal = QPalette();
+    pal.setColor(QPalette::Window, Qt::lightGray);
+    setPalette(pal);
 
 }
 
@@ -22,8 +35,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::AfficheVitesse(){
 
-        ui->label1->setText(QString(robot.VitesseFromRobot1()));
-        ui->label2->setText(QString(robot.VitesseFromRobot2()));
+        ui->Vitesse1->setText(QString(robot.VitesseFromRobot1()));
+        ui->Vitesse2->setText(QString(robot.VitesseFromRobot2()));
 
 
 }
@@ -47,7 +60,7 @@ void MainWindow::on_ButDisconnect_pressed(){
 void MainWindow::on_ButUp_pressed()
 {
 
-    robot.SetRobot1(170,170,80);
+    robot.SetRobot1(100,100,80);
     Mouvement=true;
 
 }
@@ -64,7 +77,7 @@ void MainWindow::on_ButUp_released()
 void MainWindow::on_ButRight_pressed()
 {
 
-    robot.SetRobot1(170,15,80);
+    robot.SetRobot1(100,15,80);
     Mouvement=true;
 }
 
@@ -80,7 +93,7 @@ void MainWindow::on_ButRight_released()
 void MainWindow::on_ButDown_pressed()
 {
 
-    robot.SetRobot1(170,170,0);
+    robot.SetRobot1(100,100,0);
     Mouvement=true;
 }
 
@@ -96,7 +109,7 @@ void MainWindow::on_ButDown_released()
 void MainWindow::on_ButLeft_pressed()
 {
 
-    robot.SetRobot1(15,170,80);
+    robot.SetRobot1(15,100,80);
     Mouvement=true;
 }
 
@@ -110,6 +123,32 @@ void MainWindow::on_ButLeft_released()
 
 
 
+void MainWindow::on_CAM_DOWN_pressed()
+{
+    request.setUrl(QUrl("http://192.168.1.106:8080/?action=command&dest=0&plugin=0&id=10094853&group=1&value=200"));
+        manager->get(request);
+}
+
+
+void MainWindow::on_CAM_RIGHT_pressed()
+{
+    request.setUrl(QUrl("http://192.168.1.106:8080/?action=command&dest=0&plugin=0&id=10094852&group=1&value=-200"));
+            manager->get(request);
+}
+
+
+void MainWindow::on_CAM_UP_pressed()
+{
+    request.setUrl(QUrl("http://192.168.1.106:8080/?action=command&dest=0&plugin=0&id=10094853&group=1&value=-200"));
+        manager->get(request);
+}
+
+
+void MainWindow::on_CAM_LEFT_pressed()
+{
+    request.setUrl(QUrl("http://192.168.1.106:8080/?action=command&dest=0&plugin=0&id=10094852&group=1&value=200"));
+            manager->get(request);
+}
 
 
 
