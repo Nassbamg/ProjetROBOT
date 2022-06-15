@@ -68,11 +68,6 @@ void MyRobot::MyTimerSlot() {
 }
 
 
-QTcpSocket* MyRobot::getSocket(){
-
-    return socket;
-}
-
 
 //hUSB is the serial port handle opened at 19200 baud
 void MyRobot::SetRobot1( short speed1,short speed2,unsigned char SpeedFlag)
@@ -99,28 +94,20 @@ void MyRobot::SetRobot1( short speed1,short speed2,unsigned char SpeedFlag)
 
 }
 
-short MyRobot::VitesseFromRobot1(){
+short MyRobot::VitesseFromRobot(){
 
-    short vitesse;
+    QDataStream socketstream(socket);
+    quint8 battery,speedFrontL, speedRearL,speedFrontR,speedRearR,IrLeft, IrRight;
+    socketstream>>battery>>speedFrontL>>speedRearL>>speedFrontR>>speedRearR>>IrLeft>>IrRight;
+    MyRobot::Sensors sensors;
+    sensors.battery=battery;
+    sensors.speedLeft=speedFrontL/2 + speedRearL/2;
+    sensors.speedRight=speedFrontR/2 + speedRearR/2;
+    sensors.adc4=IrLeft;
+    sensors.adc0=IrRight;
 
+    emit sensorsUpdate(sensors);
 
-    vitesse = DataReceived[0]/2448/20;
-
-
-    return vitesse;
-
-
-}
-
-short MyRobot::VitesseFromRobot2(){
-
-    short vitesse;
-
-
-
-    vitesse = DataReceived[9]/2448/20;
-
-    return vitesse;
 
 
 }
