@@ -13,6 +13,7 @@
 class MyRobot : public QObject {
     Q_OBJECT
 public:
+    QTcpSocket* getSocket();
     explicit MyRobot(QObject *parent = 0);
     void doConnect();
     void disConnect();
@@ -27,6 +28,7 @@ public:
 signals:
     void updateUI(const QByteArray Data);
 public slots:
+
     void connected();
     void disconnected();
     void bytesWritten(qint64 bytes);
@@ -39,3 +41,4 @@ private:
 };
 
 #endif // MYROBOT_H
+
